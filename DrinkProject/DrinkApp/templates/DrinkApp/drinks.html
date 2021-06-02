@@ -1,0 +1,21 @@
+{% extends 'DrinkApp/base.html' %}
+
+{% block title %}
+Drinks
+{% endblock %}
+
+{% block content %}
+<h2> Lista Drinków </h2>
+
+{% if drinks %}
+<ul>
+{% for drink in drinks %}
+    <li>{{ drink.name }}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+<h2>Obecnie nie ma drinków </h2>
+{% endif %}
+
+{% endblock %}

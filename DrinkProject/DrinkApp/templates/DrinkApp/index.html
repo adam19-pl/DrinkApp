@@ -1,0 +1,21 @@
+{% extends 'DrinkApp/base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<h2>Witaj na stronie głównej !</h2>
+
+{% for message in messages %}
+    <h2> {{ message }} </h2>
+{% endfor%}
+
+{% if user.is_authenticated %}
+    <h2>Pomyślne zalogowanie jako {{ user.username }} ! </h2>
+{% else %}
+<a href="{% url 'register' %}">Zarejestruj się</a>
+<a href="{% url 'login' %}">Zaloguj się</a>
+{% endif %}
+
+{% endblock %}
