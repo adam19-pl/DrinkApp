@@ -5,17 +5,23 @@ Home
 {% endblock %}
 
 {% block content %}
-<h2>Witaj na stronie głównej !</h2>
+<div class="home-content shadow-lg p-5 rounded">
+    <h2 class="mb-5 ">Witaj na stronie głównej aplikacji DrinkApp !</h2>
+    <p class="mb-5"><i>
+        <b>DrinkApp</b> to aplikacja w której możesz zaczęrpnąć pomysłu na stworzenie pysznego napoju lub
+        jeśli chcesz możesz podzielić się przepisem ze światem i dodać go do naszej appki.
+        Znajdziesz u nas bez problemu odpowiednie propozycję na <b>Drinki/Shoty/Koktajle</b> które rozkręcą Twoją imprezę!
+    </i>
+    </p>
+    {% for message in messages %}
+    <h2 class="mb-5"> {{ message }} </h2>
+    {% endfor%}
 
-{% for message in messages %}
-    <h2> {{ message }} </h2>
-{% endfor%}
-
-{% if user.is_authenticated %}
-    <h2>Pomyślne zalogowanie jako {{ user.username }} ! </h2>
-{% else %}
-<a href="{% url 'register' %}">Zarejestruj się</a>
-<a href="{% url 'login' %}">Zaloguj się</a>
-{% endif %}
-
+    {% if user.is_authenticated %}
+    <h4 class="mb-5"><i>Jesteś zalogowany jako {{ user.username.title }} ! </i></h4>
+    {% else %}
+    <a class="btn btn-outline-primary m-3" href="{% url 'register' %}">Zarejestruj się</a>
+    <a class="btn btn-outline-success m-3" href="{% url 'login' %}">Zaloguj się</a>
+    {% endif %}
+</div>
 {% endblock %}

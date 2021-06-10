@@ -5,17 +5,34 @@ Drinks
 {% endblock %}
 
 {% block content %}
-<h2> Lista Drinków </h2>
-
-{% if drinks %}
-<ul>
-{% for drink in drinks %}
-    <li>{{ drink.name }}</li>
-{% endfor %}
-</ul>
-
-{% else %}
-<h2>Obecnie nie ma drinków </h2>
-{% endif %}
-
+<div class="drinks-content shadow-lg p-3 rounded">
+    <h2 class=" mb-5 mt-5"> Lista Drinków </h2>
+        <p class="mb-5"><i>
+        Przed Tobą baza wszystkich drinków!
+            Jeśli szukasz konkretnej nazwy drinka lub chcesz zużyć jakieś składniki, które masz w domu to śmiało
+            skorzystaj z naszej wyszukiwarki !
+    </i></p>
+    <a href="{% url 'search_drink' %}" class="btn btn-success btn-lg mb-4"> Wyszukiwarka</a>
+    {% if drinks %}
+    <div class="d-flex w-100 flex-wrap justify-content-around ">
+        {% for drink in drinks %}
+        <div class="card mb-5 shadow bg-body rounded" style="width: 40%;">
+            {% if drink.image %}
+            <img src="{{ drink.image.url }}" class="card-img-top" style="height: 200px;" alt="{{ drink.name }}">
+            {% else %}
+            <img src="/media/images/noimage.jpg" class="card-img-top" style="height: 200px;" alt="{{ drink.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title mb-4">{{ drink.name.title }}</h5>
+                <p class="card-text mb-4">Kategoria : {{ drink.category}}</p>
+                <p class="card-text mb-4">Kalorie : {{ drink.kcal}} Kcal</p>
+                <a href="{{ drink.id }}" class="btn btn-success mb-4"> Zobacz {{ drink.name }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2>Obecnie nie ma drinków </h2>
+    {% endif %}
+</div>
 {% endblock %}

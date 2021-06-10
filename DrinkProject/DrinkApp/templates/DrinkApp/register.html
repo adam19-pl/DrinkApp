@@ -5,19 +5,20 @@ Register
 {% endblock %}
 
 {% block content %}
-
-<h2>Witaj na stronie Rejestracji ! </h2>
+<div class="register-content shadow-lg p-5 rounded">
+<h2 class="mb-5">Witaj na stronie Rejestracji ! </h2>
 
 {% if message %}
-<h2> {{ message }} </h2>
+<h2 class="mb-5"> {{ message }} </h2>
 {% endif %}
 
 <form action=" {% url 'register' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Zarejestruj</button>
+    <button type="submit" class="btn btn-outline-primary m-3">Zarejestruj</button>
+        <a class="btn btn-outline-success m-3" href="{% url 'login' %}">Zaloguj się</a>
 </form>
-<p>
-    <a href="{% url 'login' %}">Zaloguj się</a>
-</p>
+
+
+</div>
 {% endblock %}

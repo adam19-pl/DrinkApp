@@ -1,0 +1,44 @@
+{% extends 'DrinkApp/base.html' %}
+
+{% block title %}
+Drink-Information
+{% endblock %}
+
+{% block content %}
+<div class="drink-content shadow-lg p-3 rounded">
+    <h2 class="mb-3 mt-5">Drink {{ drink.name }}</h2>
+    <h4 class="mb-5"> Kategoria : {{ drink.category }}</h4>
+    <div class="drink-information mb-5">
+        <div class="left">
+            <h4 class="mt-4"> Składniki : </h4>
+            <p><i>
+                {% for i in drink.ingredient.all %}
+                {{ i }}
+                {% endfor %}
+            </i>
+            </p>
+            <h4>Opis :</h4>
+            <p><i>{{ drink.prepare }}</i></p>
+
+
+            <h4> Ilość kalorii : </h4>
+            <p><i>{{ drink.kcal }} kcal</i></p>
+
+            <h4>Porcje : {{ drink.portion }} </h4>
+            <h4>Czas przygotowania : {{ drink.time_prepare }} min </h4>
+        </div>
+        <div class="right">
+            {% if drink.image %}
+            <p>
+                <img class="img-fluid p-5" src="{{ drink.image.url }}">
+            </p>
+            {% else %}
+            <p>
+                <img class="img-fluid p-5" src="/media/images/noimage.jpg">
+            </p>
+            {% endif %}
+        </div>
+    </div>
+    <p>Dodane przez użytkownika <span>{{ drink.who_add }}</span></p>
+</div>
+{% endblock %}

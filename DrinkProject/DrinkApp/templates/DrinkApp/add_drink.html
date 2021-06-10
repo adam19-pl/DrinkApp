@@ -4,16 +4,22 @@ Drink-Add
 {% endblock %}
 
 {% block content %}
-<h2>Dodawanie Drinka</h2>
+<div class="add-drink-content shadow-lg p-3 rounded">
+<h2 class="mb-5">Dodawanie Drinka</h2>
+    <p class="mb-5"><i>
+        To właśnie tutaj możesz pochwalić się swoim przepisem na drinka z całym światem !
 
+    </i></p>
+{% if messages %}
 {% for message in messages %}
 <h2> {{ message }} </h2>
 {% endfor%}
-
+    <li><a href="{% url 'drinks'%}{{ already_drink.id }}" >{{ already_drink }}</a></li>
+{% endif %}
 <form action="{% url 'add_drink' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Dodaj</button>
+    <button class="btn btn-outline-success me-2" type="submit">Dodaj</button>
 </form>
-
+</div>
 {% endblock %}

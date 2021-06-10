@@ -5,18 +5,19 @@ Login
 {% endblock %}
 
 {% block content %}
-<h2>Witaj na stronie Logowania ! </h2>
+<div class="login-content shadow-lg p-5 rounded">
+    <h2 class="mb-5 ">Witaj na stronie Logowania ! </h2>
 
-{% for message in messages %}
-<h2> {{ message }} </h2>
-{% endfor%}
+    {% for message in messages %}
+    <h2 class="mb-5"> {{ message }} </h2>
+    {% endfor%}
 
-<form action="{% url 'login'%}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Zaloguj</button>
-</form>
-<p>
-<a href="{% url 'register' %}">Zarejestruj się</a>
-</p>
+    <form action="{% url 'login'%}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-primary m-3">Zaloguj</button>
+        <a class="btn btn-outline-success m-3" href="{% url 'register' %}">Zarejestruj się</a>
+    </form>
+
+</div>
 {% endblock %}

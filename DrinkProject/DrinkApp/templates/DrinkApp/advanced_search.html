@@ -1,0 +1,59 @@
+{% extends 'DrinkApp/base.html' %}
+
+{% block title %}
+DrinkApp Zaawansowane Szukanie
+{% endblock %}
+
+{% block content %}
+<div class="search-content shadow-lg p-3 rounded">
+    <h2 class="mb-5"> Zaawansowane Szukanie </h2>
+    <p><i>
+        Potrzebujesz konkretnego przepisu ?
+        Śmiało wprowadź nazwę drinka, może coś znajdziemy !
+        Jeśli chcesz szukać po składnikach, poniżej są wypisane wszystkie składniki uwzględnione w przepisach.
+        Wybierz kilka a aplikacja wyszuka przepisy, które zawierają zaznaczone opcje !
+    </i></p>
+    {% if objects %}
+    <h2 class="mb-5">Wyniki szukania :</h2>
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Kategoria</th>
+            <th scope="col">Zdjęcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for o in objects %}
+        <tr>
+            <th scope="row"><a class="btn btn-outline-success m-3" href="{% url 'drinks' %}{{ o.id }}">Zobacz</a></th>
+            <td><a href="{% url 'drinks'%}{{ o.id}}">{{ o.name }}</a></td>
+            <td>{{ o.category }}</td>
+            {% if o.image %}
+            <td><img src="{{ o.image.url }}"></td>
+            {% else %}
+            <td><img src="/media/images/noimage.jpg"></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="{% url 'search_drink' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-success">Szukaj</button>
+    </form>
+
+    {% else %}
+    <p>{{ message }}</p>
+    <form action="{% url 'search_drink' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-success">Szukaj</button>
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}
